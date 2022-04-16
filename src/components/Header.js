@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { Pinterest } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import FaceIcon from "@mui/icons-material/Face";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import SearchIcon from "@mui/icons-material/Search";
+import styled from "styled-components";
 import TextsmsIcon from "@mui/icons-material/Textsms";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 
-import styled from "styled-components";
-export default function Header() {
+export default function Header(props) {
+  const [searchInput, setSearchInput] = useState("");
+
+  function onSearchSubmit(e) {
+    e.preventDefault();
+    props.onSubmit(searchInput);
+    setSearchInput("");
+  }
+
   return (
     <Wrapper>
       <LogoWrapper>
@@ -24,9 +32,12 @@ export default function Header() {
           <IconButton>
             <SearchIcon />
           </IconButton>
-          <form>
-            <input placeholder="Search" />
-            <button type="submit"></button>
+          <form onSubmit={onSearchSubmit}>
+            <input
+              placeholder="Search"
+              onChange={(e) => setSearchInput(e.target.value)}
+              value={searchInput}
+            />
           </form>
         </SearchBarWrapper>
       </SearchWrapper>
