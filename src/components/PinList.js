@@ -32,5 +32,23 @@ const Wrapper = styled.div`
 `;
 
 const Container = styled.div`
-  width: 80%;
+  column-gap: 5px;
+  margin: 0 auto;
+  height: 100%;
+  @media (min-width: 1260px) {
+    max-width: 1260px;
+    column-count: 5;
+  }
+  @media (min-width: 1080px) and (max-width: 1260px) {
+    max-width: 1080px;
+    column-count: 4;
+  }
+  @media (min-width: 756px) and (max-width: 1080px) {
+    max-width: 768px;
+    column-count: 3;
+  }
+  @media (min-width: 0px) and (max-width: 756px) {
+    max-width: 504px;
+    column-count: 2;
+  }
 `;
