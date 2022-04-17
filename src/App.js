@@ -7,7 +7,20 @@ function App() {
   const [pins, setPins] = useState([]);
 
   useEffect(() => {
-    getPins("");
+    function getPins() {
+      xoosha
+        .get("https://xoosha.com/ws/1/test.php", {
+          params: {
+            offset: 10,
+          },
+        })
+        .then((res) => {
+          let newPins = [...res.data, ...pins];
+          setPins(newPins);
+        })
+        .catch((e) => console.log(e));
+    }
+    getPins();
   }, []);
 
   const onSearchSubmit = (searchTerm = "") => {
@@ -17,21 +30,7 @@ function App() {
       );
 
       setPins(filteredPins);
-    } else getPins(searchTerm);
-  };
-
-  const getPins = (searchTerm) => {
-    xoosha
-      .get("https://xoosha.com/ws/1/test.php", {
-        params: {
-          offset: 10,
-        },
-      })
-      .then((res) => {
-        let newPins = [...res.data, ...pins];
-        setPins(newPins);
-      })
-      .catch((e) => console.log(e));
+    }
   };
 
   return (
