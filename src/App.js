@@ -15,8 +15,7 @@ function App() {
           },
         })
         .then((res) => {
-          let newPins = [...res.data, ...pins];
-          setPins(newPins);
+          setPins((pins) => [...res.data, ...pins]);
         })
         .catch((e) => console.log(e));
     }
